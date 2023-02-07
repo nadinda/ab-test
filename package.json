@@ -2,15 +2,19 @@
   "name": "blinkist-web-coding-challenge-2023",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "src/index.js",
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^3.2.36"
+  },
   "devDependencies": {
     "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1"
+    "@parcel/transformer-vue": "^2.8.3",
+    "@vue/compiler-sfc": "^3.2.47",
+    "parcel": "^2.8.3"
   },
   "keywords": []
 }
