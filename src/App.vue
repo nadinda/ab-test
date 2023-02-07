@@ -1,5 +1,26 @@
 <template>
-  <div>Hello {{ name }}!</div>
+  <h1>Check out the Blinkist app</h1>
+
+  <img
+    width="300"
+    src="../images/hero_image.jpg"
+    alt="Check out the Blinkist app"
+  />
+
+  <div>
+    <!-- Control variation -->
+    Meet the app that revolutionized reading.
+  </div>
+
+  <div>
+    <!-- Test variation -->
+    Meet the app that has 18 million users.
+  </div>
+
+  <div>
+    Thanks a lot for reading the article! <a href="/signup">SIGN UP</a> for
+    Blinkist.
+  </div>
 </template>
 
 <script>
