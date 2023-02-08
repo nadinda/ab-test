@@ -24,6 +24,7 @@
 
 <script>
 import { trackPageview, trackEvent } from "./analytics-api";
+import { generateRandomNumber, generateUniqueId } from "./helper";
 
 export default {
   data() {
@@ -35,14 +36,6 @@ export default {
     };
   },
   mounted() {
-    function generateUniqueId() {
-      return Math.floor(Math.random() * Date.now());
-    }
-
-    function generateRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
     // Check if it is a new visitor.
     if (this.visitorId === null) {
       // Assign a unique id to the visitorId.
