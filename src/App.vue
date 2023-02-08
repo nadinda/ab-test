@@ -24,7 +24,7 @@
 
 <script>
 import { trackPageview, trackEvent } from "./analytics-api";
-import { generateRandomNumber, generateUniqueId } from "./helper";
+import { generateRandomNumber, generateUniqueId, getDateTime } from "./helper";
 
 export default {
   data() {
@@ -61,6 +61,7 @@ export default {
         visitorId: this.visitorId,
         variationType: this.variationType,
         pageViewCounts: this.pageViewCount,
+        timeStamp: getDateTime(),
       });
 
       // Update total page views on local storage.
@@ -83,6 +84,7 @@ export default {
         variationType: this.variationType,
         eventCounts: this.signUpClickCount,
         eventType: "signup-click",
+        timeStamp: getDateTime(),
       });
 
       // Update total sign up clicks on local storage.

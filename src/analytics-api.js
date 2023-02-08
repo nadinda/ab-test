@@ -1,6 +1,6 @@
 /**
  * Tracks a pageview to our "imaginary api" - in this demo just the browser console. ;)
- * Params: visitorId, variationType, pageViewCounts
+ * Params: visitorId, variationType, pageViewCounts, timeStamp
  */
 export const trackPageview = (params) => {
   console.log(`--> Tracking Pageview:`, params);
@@ -8,7 +8,7 @@ export const trackPageview = (params) => {
 
 /**
  * Tracks an event to our "imaginary api" - in this demo just the browser console. ;)
- * Params: visitorId, variationType, eventCounts, eventType
+ * Params: visitorId, variationType, eventCounts, eventType, timeStamp
  */
 export const trackEvent = (params) => {
   console.log(`--> Tracking Event:`,params);
