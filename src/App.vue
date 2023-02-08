@@ -1,23 +1,24 @@
 <template>
-  <h1>Check out the Blinkist app</h1>
-
-  <img
-    width="300"
-    src="../images/hero_image.jpg"
-    alt="Check out the Blinkist app"
-  />
-
-  <div v-if="variationType === 'control'">
-    Meet the app that revolutionized reading.
+  <header class="header">
+    <h1>Check out the Blinkist app</h1>
+  </header>
+  <div class="header-border"></div>
+  <div class="content">
+    <img src="../images/hero_image.jpg" alt="Check out the Blinkist app" />
+    <div class="variant-text">
+      <div v-if="variationType === 'control'">
+        Meet the app that revolutionized reading.
+      </div>
+      <div v-if="variationType === 'test'">
+        Meet the app that has 18 million users.
+      </div>
+    </div>
   </div>
 
-  <div v-if="variationType === 'test'">
-    Meet the app that has 18 million users.
-  </div>
-
-  <div>
-    Thanks a lot for reading the article!
-    <a href="#" @click="trackSignupClick">SIGN UP</a> for Blinkist.
+  <div class="cta">
+    <p>Thanks a lot for reading the article!</p>
+    <a href="#" @click="trackSignupClick" class="signup-link">SIGN UP</a>
+    for Blinkist.
   </div>
 </template>
 
@@ -97,3 +98,85 @@ export default {
   },
 };
 </script>
+
+<style>
+.header {
+  color: var(--blinkist-blue-dark);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-size: 1.2em;
+  font-family: "CeraPRO-Bold", sans-serif, arial;
+}
+
+.header-border {
+  width: 20rem;
+  height: 0.4rem;
+  margin: 1.5rem;
+  background-color: var(--blinkist-blue-light);
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content img {
+  width: 50%;
+  box-shadow: 0px 0px 20px darkgrey;
+}
+
+.variant-text {
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  color: var(--blinkist-blue-dark);
+  font-size: 1.2em;
+}
+
+.cta {
+  background-color: var(--blinkist-green);
+  box-shadow: 0px 0px 10px var(--blinkist-green);
+  color: var(--blinkist-blue-dark);
+  padding: 1rem;
+  margin: 1.5rem;
+  text-align: center;
+  line-height: 150%;
+  border-radius: 10px;
+}
+
+.cta p {
+  margin: 0;
+}
+
+.signup-link {
+  color: var(--blinkist-blue-dark);
+  font-weight: bold;
+}
+
+.signup-link:hover {
+  background-color: var(--blinkist-blue-dark);
+  color: #fff;
+  text-decoration: none;
+  opacity: 1;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .content img {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0px 0px 20px darkgrey;
+  }
+
+  .variant-text {
+    padding: 0;
+    width: 100%;
+  }
+}
+</style>

@@ -1,4 +1,9 @@
 /* Type your code here */
+:root {
+  --blinkist-green: #2cde80;
+  --blinkist-blue-dark: #002f54;
+  --blinkist-blue-light: #1775fc;
+}
 
 body {
   font-family: sans-serif;
