@@ -22,11 +22,14 @@
 </template>
 
 <script>
+import { trackPageview } from "./analytics-api";
+
 export default {
   data() {
     return {
       visitorId: window.localStorage.getItem("visitorId"),
       variationType: window.localStorage.getItem("variationType"),
+      pageViewCount: window.localStorage.getItem("pageViewCount"),
     };
   },
   mounted() {
@@ -47,9 +50,26 @@ export default {
       this.variationType =
         generateRandomNumber(0, 1) === 0 ? "control" : "test";
 
+      // Count first page view for a new visitor.
+      this.pageViewCount = 1;
+
       // Persist data in localStorage.
       window.localStorage.setItem("visitorId", this.visitorId);
       window.localStorage.setItem("variationType", this.variationType);
+      window.localStorage.setItem("pageViewCount", this.pageViewCount);
+    } else {
+      // If it is the same visitor count up the page views.
+      this.pageViewCount++;
+
+      // Send payload for tracking page views to analytics-api.
+      trackPageview({
+        visitorId: this.visitorId,
+        variationType: this.variationType,
+        pageViewCounts: this.pageViewCount,
+      });
+
+      // Update total page views on local storage.
+      window.localStorage.setItem("pageViewCount", this.pageViewCount);
     }
   },
 };

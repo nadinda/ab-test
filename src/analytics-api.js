@@ -4,7 +4,7 @@
  * The URL is probably a good start though.
  */
 export const trackPageview = (params) => {
-  console.log(`--> Tracking Pageview: ${params}`);
+  console.log(`--> Tracking Pageview:`, params);
 };
 
 /**
