@@ -16,13 +16,13 @@
   </div>
 
   <div>
-    Thanks a lot for reading the article! <a href="/signup">SIGN UP</a> for
-    Blinkist.
+    Thanks a lot for reading the article!
+    <a href="#" @click="trackSignupClick">SIGN UP</a> for Blinkist.
   </div>
 </template>
 
 <script>
-import { trackPageview } from "./analytics-api";
+import { trackPageview, trackEvent } from "./analytics-api";
 
 export default {
   data() {
@@ -30,6 +30,7 @@ export default {
       visitorId: window.localStorage.getItem("visitorId"),
       variationType: window.localStorage.getItem("variationType"),
       pageViewCount: window.localStorage.getItem("pageViewCount"),
+      signUpClickCount: window.localStorage.getItem("signUpClickCount"),
     };
   },
   mounted() {
@@ -71,6 +72,28 @@ export default {
       // Update total page views on local storage.
       window.localStorage.setItem("pageViewCount", this.pageViewCount);
     }
+  },
+  methods: {
+    trackSignupClick() {
+      // If signUpClickCount from localStorage does not exist yet, set the first click to signUpClickCount.
+      if (!this.signUpClickCount) {
+        this.signUpClickCount = 1;
+      } else {
+        // Count up every time the sign up button is clicked.
+        this.signUpClickCount++;
+      }
+
+      // Send payload for tracking sign up click events to analytics.
+      trackEvent({
+        visitorId: this.visitorId,
+        variationType: this.variationType,
+        eventCounts: this.signUpClickCount,
+        eventType: "signup-click",
+      });
+
+      // Update total sign up clicks on local storage.
+      window.localStorage.setItem("signUpClickCount", this.signUpClickCount);
+    },
   },
 };
 </script>

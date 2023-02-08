@@ -13,5 +13,5 @@ export const trackPageview = (params) => {
  * The URL and an event name are probably a good start though.
  */
 export const trackEvent = (params) => {
-  console.log(`--> Tracking Event: ${params}`);
+  console.log(`--> Tracking Event:`,params);
 };
