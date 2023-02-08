@@ -36,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    // Check if it is a new visitor.
+    // Detect a new visitor by checking if visitorId exists.
     if (this.visitorId === null) {
       // Assign a unique id to the visitorId.
       this.visitorId = generateUniqueId();
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     trackSignupClick() {
-      // If signUpClickCount from localStorage does not exist yet, set the first click to signUpClickCount.
+      // If signUpClickCount from localStorage does not exist yet, set 1 to signUpClickCount.
       if (!this.signUpClickCount) {
         this.signUpClickCount = 1;
       } else {
