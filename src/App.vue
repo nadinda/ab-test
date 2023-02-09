@@ -7,10 +7,10 @@
     <img src="../images/hero_image.jpg" alt="Check out the Blinkist app" />
     <div class="variant-text">
       <div v-if="variationType === 'control'">
-        Meet the app that revolutionized reading.
+        {{ variations[0].content }}
       </div>
       <div v-if="variationType === 'test'">
-        Meet the app that has 18 million users.
+        {{ variations[1].content }}
       </div>
     </div>
   </div>
@@ -28,7 +28,19 @@ import { generateRandomNumber, generateUniqueId, getDateTime } from "./helper";
 
 export default {
   data() {
+    const variations = [
+      {
+        type: "control",
+        content: "Meet the app that revolutionized reading.",
+      },
+      {
+        type: "test",
+        content: "Meet the app that has 18 million users.",
+      },
+    ];
+
     return {
+      variations: variations,
       visitorId: window.localStorage.getItem("visitorId"),
       variationType: window.localStorage.getItem("variationType"),
       pageViewCount: window.localStorage.getItem("pageViewCount"),
@@ -43,7 +55,9 @@ export default {
 
       // Assign a random variaton type to new visitor.
       this.variationType =
-        generateRandomNumber(0, 1) === 0 ? "control" : "test";
+        generateRandomNumber(0, 1) === 0
+          ? this.variations[0].type
+          : this.variations[1].type;
 
       // Count first page view for a new visitor.
       this.pageViewCount = 1;
@@ -56,17 +70,18 @@ export default {
       // If it is the same visitor count up the page views.
       this.pageViewCount++;
 
-      // Send payload for tracking page views to analytics-api.
-      trackPageview({
-        visitorId: this.visitorId,
-        variationType: this.variationType,
-        pageViewCounts: this.pageViewCount,
-        timeStamp: getDateTime(),
-      });
-
       // Update total page views on local storage.
       window.localStorage.setItem("pageViewCount", this.pageViewCount);
     }
+
+    // Send payload for tracking page views to analytics-api.
+    trackPageview({
+      visitorId: this.visitorId,
+      variationType: this.variationType,
+      pageViewCounts: this.pageViewCount,
+      pageUrl: window.location.href,
+      timeStamp: getDateTime(),
+    });
   },
   methods: {
     trackSignupClick() {
@@ -84,6 +99,7 @@ export default {
         variationType: this.variationType,
         eventCounts: this.signUpClickCount,
         eventType: "signup-click",
+        pageUrl: window.location.href,
         timeStamp: getDateTime(),
       });
 
@@ -115,10 +131,12 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: justify;
 }
 
 .content img {
-  width: 50%;
+  margin: 0 auto;
+  width: 60%;
   box-shadow: 0px 0px 20px darkgrey;
 }
 
